@@ -1,46 +1,8 @@
-import random
-import pandas as pd
 import numpy as np
 import matplotlib.ticker
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
-
-
-PROVINCE_ABBR = {
-    "Alberta": "AB",
-    "British Columbia": "BC",
-    "Manitoba": "MB",
-    "New Brunswick": "NB",
-    "Newfoundland and Labrador": "NL",
-    "Nova Scotia": "NS",
-    "Northwest Territories": "NT",
-    "Nunavut": "NU",
-    "Ontario": "ON",
-    "Prince Edward Island": "PE",
-    "Quebec": "QC",
-    "Saskatchewan": "SK",
-    "Yukon": "YT"
-}
-
-
-COLORS = [
-    'blue',
-    'brown',
-    'orange',
-    'pink',
-    'green',
-    'gray',
-    'red',
-    'olive',
-    'purple',
-    'cyan',
-    'lime',
-    'deeppink',
-    'moccasin'
-]
-
-
-CSV_URL = "https://health-infobase.canada.ca/src/data/covidLive/covid19.csv"
+from utils import *
 
 
 def init_data_xaxis():
@@ -154,12 +116,9 @@ def make_bar_chart_over_time(title, data, provinces, dates, filename):
 
 
 def main():
-    data = pd.read_csv(CSV_URL)
-    data['date'] = pd.to_datetime(data['date'], format="%d-%m-%Y")
-    data = data[(data['prname'] != 'Canada') & (data["prname"] != "Repatriated travellers")].fillna(0)
+    data, dates, provinces = get_csv()
 
-    dates = sorted(list(set(data['date'])))
-    provinces = list(set(data['prname']))
+    data = data[(data['prname'] != 'Canada') & (data["prname"] != "Repatriated travellers")].fillna(0)
 
     num_total = data.groupby(['date', 'prname']).sum()['numtotal'].to_dict()
     make_line_plot_over_time("Total Cases", num_total, provinces, dates, 'total_cases.png')

@@ -1,3 +1,6 @@
+import pandas as pd
+
+
 PROVINCE_ABBR = {
     "Alberta": "AB",
     "British Columbia": "BC",
@@ -33,3 +36,13 @@ COLORS = [
 
 
 CSV_URL = "https://health-infobase.canada.ca/src/data/covidLive/covid19.csv"
+
+
+def get_csv():
+    data = pd.read_csv(CSV_URL)
+    data['date'] = pd.to_datetime(data['date'], format="%d-%m-%Y")
+
+    dates = sorted(list(set(data['date'])))
+    provinces = list(set(data['prname']))
+
+    return data, dates, provinces
