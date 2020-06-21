@@ -6,11 +6,11 @@ from matplotlib.animation import FFMpegWriter
 plt.rcParams['animation.ffmpeg_path'] = "D:\\ffmpeg-20200619-2f59946-win64-static\\bin\\ffmpeg.exe"
 
 data = pd.read_csv("https://health-infobase.canada.ca/src/data/covidLive/covid19.csv")
-province = 'Ontario'
+province = 'Alberta'
 info_of_province = data[data["prname"] == province]
 dates = info_of_province.iloc[:, 3].values
 num_deaths = info_of_province.iloc[:, 6].values
-info_of_province['numrecover'] = info_of_province['numrecover'].fillna(0)
+info_of_province['numrecover'] = info_of_province['numrecover'].fillna(method='ffill')
 num_recovers = info_of_province.iloc[:, 9].values
 length = len(dates)
 
