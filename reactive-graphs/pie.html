@@ -1,0 +1,85 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+  
+  <head>
+    
+      <meta charset="utf-8">
+      <title>Bokeh Plot</title>
+      
+      
+        
+          
+        
+        
+          
+        <script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-2.1.0.min.js" integrity="sha384-YobFyzPeVUsFQydHkJGsJL1kyfHnWxOlPc3EwaV22TmBaeGoXHLWx5aRRVPS9xlE" crossorigin="anonymous"></script>
+        <script type="text/javascript">
+            Bokeh.set_log_level("info");
+        </script>
+        
+      
+      
+    
+  </head>
+  
+  
+  <body>
+    
+      
+        
+          
+          
+            
+              <div class="bk-root" id="f2b2a022-7091-4488-b5ce-7070b740a21f" data-root-id="1001"></div>
+            
+          
+        
+      
+      
+        <script type="application/json" id="1124">
+          {"fa13bfbb-0260-4c84-9662-df99cf89a4b4":{"roots":{"references":[{"attributes":{"active_drag":"auto","active_inspect":"auto","active_multi":null,"active_scroll":"auto","active_tap":"auto","tools":[{"id":"1020"}]},"id":"1021","type":"Toolbar"},{"attributes":{"data_source":{"id":"1025"},"glyph":{"id":"1027"},"hover_glyph":null,"muted_glyph":null,"nonselection_glyph":{"id":"1028"},"selection_glyph":null,"view":{"id":"1030"}},"id":"1029","type":"GlyphRenderer"},{"attributes":{"axis":{"id":"1016"},"dimension":1,"grid_line_color":null,"ticker":null},"id":"1019","type":"Grid"},{"attributes":{"axis_label":null,"formatter":{"id":"1034"},"ticker":{"id":"1013"},"visible":false},"id":"1012","type":"LinearAxis"},{"attributes":{},"id":"1010","type":"LinearScale"},{"attributes":{"data":{"angle":{"__ndarray__":"QIiljzg1C0BBu5asZZIAQMvOgG8LjN4/+h6TQu82xj/oRo/lVOWwP3aartFNH6c/2JL+mZk8kz+fC5lKB6CQP8M5LHuS5IQ/cdXi/3WEWz+5btoSjn9KP9fTuF7ua0Y/ZwaohB5iND8AAAAAAAAAAA==","dtype":"float64","order":"little","shape":[14]},"color":["#3182bd","#6baed6","#9ecae1","#c6dbef","#e6550d","#fd8d3c","#fdae6b","#fdd0a2","#31a354","#74c476","#a1d99b","#c7e9c0","#756bb1","#9e9ac8"],"date":["20-06-2020","20-06-2020","20-06-2020","20-06-2020","20-06-2020","20-06-2020","20-06-2020","20-06-2020","20-06-2020","20-06-2020","20-06-2020","20-06-2020","20-06-2020","20-06-2020"],"deathstoday":{"__ndarray__":"AAAAAACAQEAAAAAAAAA/QAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD4fwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==","dtype":"float64","order":"little","shape":[14]},"index":[1,2,3,4,5,6,7,8,9,10,11,12,13,14],"numconf":[54674,33301,7673,2790,1061,726,302,261,164,27,13,11,5,0],"numdeaths":{"__ndarray__":"AAAAAAAgtUAAAAAAAEakQAAAAAAAAGNAAAAAAAAAZUAAAAAAAABPQAAAAAAAACpAAAAAAAAAHEAAAAAAAAAIQAAAAAAAAABAAAAAAAAAAAAAAAAAAAD4fwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==","dtype":"float64","order":"little","shape":[14]},"numprob":[0,0,0,0,0,0,11,0,0,0,0,0,0,0],"numrecover":{"__ndarray__":"AAAAAECo1kAAAAAAAM3bQAAAAAAAVLtAAAAAAAAYo0AAAAAAADCPQAAAAAAA+INAAAAAAABQckAAAAAAACBwQAAAAAAA4GBAAAAAAAAAO0AAAAAAAAAqQAAAAAAAACZAAAAAAAAAFEAAAAAAAAAAAA==","dtype":"float64","order":"little","shape":[14]},"numtested":{"__ndarray__":"AAAAAHDTIEEAAAAAR/4wQQAAAAB0sxRBAAAAAFCCAkEAAAAA4FzpQAAAAADAx+lAAAAAAGBq60AAAAAAAKrOQAAAAAAAq+FAAAAAAIDXwkAAAAAAAABTQAAAAAAAiJNAAAAAAAB+oUAAAAAAALiOQA==","dtype":"float64","order":"little","shape":[14]},"numtoday":[124,206,48,0,0,10,2,0,0,0,0,0,0,0],"numtotal":[54674,33301,7673,2790,1061,726,313,261,164,27,13,11,5,0],"percentactive":{"__ndarray__":"9ihcj8LVR0DhehSuR+EaQFyPwvUoXBtAhetRuB6FGUAK16NwPQq3P+F6FK5HYSRAmpmZmZmZEEAAAAAAAAAAAPYoXI/CdTBAAAAAAAAAAAAAAAAAAAD4fwAAAAAAAAAAAAAAAAAAAAAAAAAAAAD4fw==","dtype":"float64","order":"little","shape":[14]},"percentdeath":{"__ndarray__":"SOF6FK7HI0ApXI/C9SgfQK5H4XoUrv8/FK5H4XoUGEBcj8L1KFwXQKRwPQrXo/w/7FG4HoXrAUBmZmZmZmbyP4XrUbgehfM/AAAAAAAAAAAAAAAAAAD4fwAAAAAAAAAAAAAAAAAAAAAAAAAAAAD4fw==","dtype":"float64","order":"little","shape":[14]},"percentoday":{"__ndarray__":"cT0K16NwzT/Xo3A9CtfjPylcj8L1KOQ/AAAAAAAAAAAAAAAAAAAAAGZmZmZmZvY/exSuR+F65D8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==","dtype":"float64","order":"little","shape":[14]},"percentrecover":{"__ndarray__":"uB6F61E4RUCPwvUoXF9VQOxRuB6Fy1ZAZmZmZmbmVUCkcD0K14NXQOF6FK5HAVZA16NwPQpnV0BmZmZmZrZYQBSuR+F6lFRAAAAAAAAAWUAAAAAAAABZQAAAAAAAAFlAAAAAAAAAWUAAAAAAAAD4fw==","dtype":"float64","order":"little","shape":[14]},"prname":["Quebec","Ontario","Alberta","British Columbia","Nova Scotia","Saskatchewan","Manitoba","Newfoundland and Labrador","New Brunswick","Prince Edward Island","Repatriated travellers","Yukon","Northwest Territories","Nunavut"],"prnameFR":["Qu\u00e9bec","Ontario","Alberta","Colombie-Britannique","Nouvelle-\u00c9cosse","Saskatchewan","Manitoba","Terre-Neuve-et-Labrador","Nouveau-Brunswick","\u00cele-du-Prince-\u00c9douard","Voyageurs rapatri\u00e9s","Yukon","Territoires du Nord-Ouest","Nunavut"],"pruid":[24,35,48,59,12,47,46,10,13,11,99,60,61,62],"ratedeaths":{"__ndarray__":"ku18PzXeT0BxPQrXo9AxQDeJQWDl0AtAGy/dJAaBCkDUeOkmMYgZQIPAyqFFtvE/JzEIrBxa4D9mZmZmZmbiP6abxCCwctA/AAAAAAAAAAAAAAAAAAD4fwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==","dtype":"float64","order":"little","shape":[14]},"ratetested":{"__ndarray__":"AAAAAIC670AAAAAAYKryQAAAAABQ8fJAAAAAAMAy3UAAAAAAIBzqQAAAAABg8+VAAAAAAOAE5EAAAAAAwGXdQAAAAABgvuZAAAAAAGAD7kAAAAAAAAD4fwAAAABA4d1AAAAAAKBj6EAAAAAAAMHYQA==","dtype":"float64","order":"little","shape":[14]},"ratetotal":{"__ndarray__":"exSuR+EihEDsUbgehZNsQClcj8L18GVAw/UoXI+CS0CuR+F6FE5bQClcj8L16E5AXI/C9SjcNkCF61G4HgVJQFyPwvUoHDVAMzMzMzMzMUAAAAAAAAD4f65H4XoU7jpAzczMzMxMJkAAAAAAAAAAAA==","dtype":"float64","order":"little","shape":[14]},"recoveredtoday":{"__ndarray__":"AAAAAACgbEAAAAAAAEBrQAAAAAAAgEFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAhAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==","dtype":"float64","order":"little","shape":[14]},"testedtoday":{"__ndarray__":"AAAAAAAruEAAAAAAAN/ZQAAAAAAA/7hAAAAAAACEmkAAAAAAANBxQAAAAAAAQIBAAAAAAABQh0AAAAAAACBkQAAAAAAAqIFAAAAAAACgY0AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAiQA==","dtype":"float64","order":"little","shape":[14]}},"selected":{"id":"1037"},"selection_policy":{"id":"1036"}},"id":"1025","type":"ColumnDataSource"},{"attributes":{"field":"angle","include_zero":true},"id":"1023","type":"CumSum"},{"attributes":{},"id":"1034","type":"BasicTickFormatter"},{"attributes":{"start":-0.5},"id":"1004","type":"Range1d"},{"attributes":{"label":{"field":"prname"},"renderers":[{"id":"1029"}]},"id":"1039","type":"LegendItem"},{"attributes":{"field":"angle"},"id":"1024","type":"CumSum"},{"attributes":{},"id":"1013","type":"BasicTicker"},{"attributes":{"end_angle":{"expr":{"id":"1024"},"units":"rad"},"fill_alpha":{"value":0.1},"fill_color":{"field":"color"},"line_alpha":{"value":0.1},"line_color":{"value":"white"},"radius":{"units":"data","value":0.4},"start_angle":{"expr":{"id":"1023"},"units":"rad"},"x":{"value":0},"y":{"value":1}},"id":"1028","type":"Wedge"},{"attributes":{"below":[{"id":"1012"}],"center":[{"id":"1015"},{"id":"1019"},{"id":"1038"}],"left":[{"id":"1016"}],"plot_height":400,"renderers":[{"id":"1029"}],"title":{"id":"1002"},"toolbar":{"id":"1021"},"toolbar_location":null,"x_range":{"id":"1004"},"x_scale":{"id":"1008"},"y_range":{"id":"1006"},"y_scale":{"id":"1010"}},"id":"1001","subtype":"Figure","type":"Plot"},{"attributes":{"axis_label":null,"formatter":{"id":"1032"},"ticker":{"id":"1017"},"visible":false},"id":"1016","type":"LinearAxis"},{"attributes":{"items":[{"id":"1039"}]},"id":"1038","type":"Legend"},{"attributes":{"axis":{"id":"1012"},"grid_line_color":null,"ticker":null},"id":"1015","type":"Grid"},{"attributes":{"text":"Pie Chart of Confirmed numbers in Different provinces"},"id":"1002","type":"Title"},{"attributes":{},"id":"1017","type":"BasicTicker"},{"attributes":{},"id":"1032","type":"BasicTickFormatter"},{"attributes":{},"id":"1008","type":"LinearScale"},{"attributes":{"callback":null,"tooltips":"@prname: @numconf"},"id":"1020","type":"HoverTool"},{"attributes":{},"id":"1037","type":"Selection"},{"attributes":{},"id":"1036","type":"UnionRenderers"},{"attributes":{"end_angle":{"expr":{"id":"1024"},"units":"rad"},"fill_color":{"field":"color"},"line_color":{"value":"white"},"radius":{"units":"data","value":0.4},"start_angle":{"expr":{"id":"1023"},"units":"rad"},"x":{"value":0},"y":{"value":1}},"id":"1027","type":"Wedge"},{"attributes":{"source":{"id":"1025"}},"id":"1030","type":"CDSView"},{"attributes":{},"id":"1006","type":"DataRange1d"}],"root_ids":["1001"]},"title":"Bokeh Application","version":"2.1.0"}}
+        </script>
+        <script type="text/javascript">
+          (function() {
+            var fn = function() {
+              Bokeh.safely(function() {
+                (function(root) {
+                  function embed_document(root) {
+                    
+                  var docs_json = document.getElementById('1124').textContent;
+                  var render_items = [{"docid":"fa13bfbb-0260-4c84-9662-df99cf89a4b4","root_ids":["1001"],"roots":{"1001":"f2b2a022-7091-4488-b5ce-7070b740a21f"}}];
+                  root.Bokeh.embed.embed_items(docs_json, render_items);
+                
+                  }
+                  if (root.Bokeh !== undefined) {
+                    embed_document(root);
+                  } else {
+                    var attempts = 0;
+                    var timer = setInterval(function(root) {
+                      if (root.Bokeh !== undefined) {
+                        clearInterval(timer);
+                        embed_document(root);
+                      } else {
+                        attempts++;
+                        if (attempts > 100) {
+                          clearInterval(timer);
+                          console.log("Bokeh: ERROR: Unable to run BokehJS code because BokehJS library is missing");
+                        }
+                      }
+                    }, 10, root)
+                  }
+                })(window);
+              });
+            };
+            if (document.readyState != "loading") fn();
+            else document.addEventListener("DOMContentLoaded", fn);
+          })();
+        </script>
+    
+  </body>
+  
+</html>
