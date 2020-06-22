@@ -1,3 +1,5 @@
+from typing import List, Dict, Tuple
+from pandas import Timestamp
 import numpy as np
 import matplotlib.ticker
 import matplotlib.pyplot as plt
@@ -5,7 +7,10 @@ import matplotlib.dates as mdates
 from utils import *
 
 
-def init_data_xaxis():
+def init_date_xaxis() -> None:
+    """Initialize the x axis and set the plot image size to 12 inch."""
+
+    # Set the unit of x axis to month.
     months = mdates.MonthLocator()
     days = mdates.DayLocator()
 
@@ -13,62 +18,152 @@ def init_data_xaxis():
     plt.gca().xaxis.set_major_formatter(mdates.DateFormatter("%b"))
     plt.gca().xaxis.set_minor_locator(days)
 
+    # Rotate the date ticks.
     plt.gcf().autofmt_xdate()
+
+    # Clear previous legend.
+    legend = plt.gca().get_legend()
+    if legend is not None:
+        legend.remove()
+
     plt.gcf().set_size_inches(12, 12)
 
 
-def make_data_list_and_max_total(data, provinces, dates):
-    max_total = 0
+def make_data_list_and_max_total(
+        data: Dict[Tuple[Timestamp, str], int],
+        provinces: List[str],
+        dates: List[Timestamp]) -> Tuple[List[List[int]], int]:
+    """Convert data dictionary to matrix.
+
+    Convert a data dictionary to a matrix. The matrix is a 2D matrix where the # of rows
+    is the # of provinces and the # of columns is the # of dates.
+
+    Args:
+        data: The data dictionary which keys are date-province tuples.
+        provinces: All provinces in the data dictionary.
+        dates: All dates in the data dictionary.
+
+    Returns:
+        y: The 2D data matrix.
+        y_tick_max: The maximum y axis tick value in log scale.
+    """
+    y_tick_max = 0
     y = np.zeros((len(provinces), len(dates)), dtype=int).tolist()
     for k, v in data.items():
         date, province = k
         y[provinces.index(province)][dates.index(date)] = v
-        max_total = max(max_total, v)
-    max_total = (int(str(max_total)[0]) + 1) * 10 ** (len(str(max_total)) - 1)
+        y_tick_max = max(y_tick_max, v)
+    y_tick_max = (int(str(y_tick_max)[0]) + 1) * 10 ** (len(str(y_tick_max)) - 1)
 
-    return y, max_total
+    return y, y_tick_max
 
 
-def make_line_plot_over_time(title, data, provinces, dates, filename):
-    y, max_total = make_data_list_and_max_total(data, provinces, dates)
+def remove_zeros(
+        y: List[List[int]],
+        dates: List[Timestamp]) -> Tuple[List[List[int]], List[Timestamp]]:
+    """Remove all-zero columns in the 2D data matrix.
 
-    found_non_zero = False
-    for i in range(0, len(dates)):
-        for j in range(0, len(provinces)):
-            if y[j][i] != 0:
-                y = [l[i:] for l in y]
-                dates = dates[i:]
-                found_non_zero = True
-                break
+    Cut all-zero columns at the beginning and the end of the data matrix. And
+    remove dates that correspond to a all-zero column in the date list.
 
-        if found_non_zero:
-            break
+    Args:
+        y: The 2D data matrix.
+        dates: The date list.
 
+    Returns:
+        y: Sliced 2D data matrix.
+        dates: Sliced dates List."""
+    y = np.array(y)
+    while not np.any(y[:, 0]):
+        y = y[:, 1:]
+        dates = dates[1:]
+
+    while not np.any(y[:, -1]):
+        y = y[:, :-1]
+        dates = dates[:-1]
+
+    return y.tolist(), dates
+
+
+def make_line_plot_over_time(
+        title: str,
+        data: Dict[Tuple[Timestamp, str], int],
+        provinces: List[str],
+        dates: List[Timestamp],
+        filename: str) -> None:
+    """Create a line plot.
+
+    Make a line plot for the given data and dates and save the image to the given file name.
+    The y axis is shown in log scale.
+
+    Args:
+        title: Title of the plot.
+        data: The data dictionary where keys are date-province tuples.
+        provinces: List of all province names.
+        dates: List of all dates.
+        filename: The file name to save.
+
+    Returns:
+        None
+    """
+    init_date_xaxis()
+
+    y, y_tick_max = make_data_list_and_max_total(data, provinces, dates)
+    y, dates = remove_zeros(y, dates)
+
+    labels = []
+    handles = []
     for i, province in enumerate(provinces):
-        plt.plot(dates, y[i], label=PROVINCE_ABBR[province], color=COLORS[i])
+        labels.append(PROVINCE_ABBR[province])
+        handles.append(plt.plot(dates, y[i], color=COLORS[i])[0])
 
+    # Generate y axis ticks.
     y_ticks = [1]
-    while y_ticks[-1] * 10 < max_total:
+    while y_ticks[-1] * 10 < y_tick_max:
         y_ticks.append(y_ticks[-1] * 10)
-    y_ticks.append(max_total)
-
-    init_data_xaxis()
+    y_ticks.append(y_tick_max)
 
     plt.yscale('log')
 
+    # Disable the scientific notation on y axis.
     plt.gca().yaxis.set_major_formatter(matplotlib.ticker.ScalarFormatter())
     plt.gca().ticklabel_format(useOffset=False, style='plain', axis='y')
-    plt.ylim(top=max_total)
+
+    # Eliminate the margin on the x axis.
+    plt.margins(x=0)
+
+    plt.ylim(top=y_tick_max)
     plt.gca().set_yticks(y_ticks)
 
-    plt.legend()
+    plt.legend(handles, labels)
     plt.title(title)
     plt.savefig(filename, bbox_inches='tight')
 
 
-def make_bar_chart_over_time(title, data, provinces, dates, filename):
-    y, _ = make_data_list_and_max_total(data, provinces, dates)
+def make_bar_chart_over_time(
+        title: str,
+        data: Dict[Tuple[Timestamp, str], int],
+        provinces: List[str],
+        dates: List[Timestamp],
+        filename: str) -> None:
+    """Create a bar chart.
 
+    Create and a bar chart with given data and dates and save the image to the given file name.
+
+    Args:
+        title: Title of the plot.
+        data: The data dictionary where keys are date-province tuples.
+        provinces: List of all province names.
+        dates: List of all dates.
+        filename: The file name to save.
+
+    Returns:
+        None
+    """
+    y, _ = make_data_list_and_max_total(data, provinces, dates)
+    y, dates = remove_zeros(y, dates)
+
+    # Start from the day which total value is large than 10.
     for i in range(0, len(dates)):
         s = 0
         for j in range(0, len(provinces)):
@@ -79,23 +174,34 @@ def make_bar_chart_over_time(title, data, provinces, dates, filename):
             dates = dates[i:]
             break
 
-    fig, axs = plt.subplots(2, 1, sharex=True, gridspec_kw={'height_ratios': [1, 15]})
+    fig, axs = plt.subplots(2, 1, sharex='all', gridspec_kw={'height_ratios': [1, 15]})
+    init_date_xaxis()
 
+    labels = []
+    handles = []
     bottoms = np.zeros(len(dates))
     for a, province, color in zip(y, provinces, COLORS):
-        for ax in axs:
-            ax.bar(dates, a, label=PROVINCE_ABBR[province], color=color, bottom=bottoms)
+        for i, ax in enumerate(axs):
+            h = ax.bar(dates, a, label=PROVINCE_ABBR[province], color=color, bottom=bottoms)[0]
+            if i == 1:
+                handles.append(h)
+                labels.append(PROVINCE_ABBR[province])
         bottoms += a
 
-    sums = sorted(bottoms.tolist())
+    # Eliminate the margin on the x axis.
+    plt.xlim(dates[0], dates[-1])
 
+    # Find out the break position and set the limits of y axis.
+    sums = np.sort(bottoms)
     axs[0].set_ylim(sums[-1] - 5, sums[-1] + 5)
     axs[1].set_ylim(0, sums[-2] + 5)
 
+    # Hide the axis between the break.
     axs[0].spines['bottom'].set_visible(False)
     axs[0].tick_params(axis='x', which='both', bottom=False)
     axs[1].spines['top'].set_visible(False)
 
+    # Draw the break tick.
     break_len = 0.010
     left_break_x = (-break_len, break_len)
     right_break_x = (1 - break_len, 1 + break_len)
@@ -109,16 +215,16 @@ def make_bar_chart_over_time(title, data, provinces, dates, filename):
     axs[1].plot(left_break_x, bottom_break_y, **kwargs)
     axs[1].plot(right_break_x, bottom_break_y, **kwargs)
 
-    init_data_xaxis()
-    plt.legend(loc='upper left')
+    plt.legend(handles, labels, loc='upper left')
     plt.suptitle(title, y=0.90)
     plt.savefig(filename, bbox_inches='tight')
 
 
-def main():
-    data, dates, provinces = get_csv()
+def main() -> None:
+    """Main function."""
 
-    data = data[(data['prname'] != 'Canada') & (data["prname"] != "Repatriated travellers")].fillna(0)
+    data, dates, provinces = get_csv()
+    data = data[data['prname'] != 'Canada']
 
     num_total = data.groupby(['date', 'prname']).sum()['numtotal'].to_dict()
     make_line_plot_over_time("Total Cases", num_total, provinces, dates, 'total_cases.png')

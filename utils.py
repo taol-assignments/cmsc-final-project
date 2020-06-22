@@ -41,7 +41,7 @@ CSV_URL = "https://health-infobase.canada.ca/src/data/covidLive/covid19.csv"
 def get_csv():
     data = pd.read_csv(CSV_URL)
     data['date'] = pd.to_datetime(data['date'], format="%d-%m-%Y")
-    data = data[(data['prname'] != 'Canada') & (data["prname"] != "Repatriated travellers")].fillna(0)
+    data = data[data["prname"] != "Repatriated travellers"].fillna(0)
 
     dates = sorted(list(set(data['date'])))
     provinces = list(set(data['prname']))
