@@ -132,7 +132,7 @@ def make_line_plot_over_time(
     # Eliminate the margin on the x axis.
     plt.margins(x=0)
 
-    plt.ylim(top=y_tick_max)
+    plt.ylim(bottom=1, top=y_tick_max)
     plt.gca().set_yticks(y_ticks)
 
     plt.legend(handles, labels)
