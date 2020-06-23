@@ -9,7 +9,7 @@ def plot(dates, original, predict, actual):
     plt.plot(dates[:len(original)], original, color='blue')
     plt.plot(dates[len(original):], predict, color='red')
     plt.plot(dates[len(original):], actual, color='green')
-    plt.show()
+    plt.savefig('future_cases.png')
 
 
 def main():
