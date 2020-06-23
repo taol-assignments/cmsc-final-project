@@ -45,7 +45,7 @@ def main():
 
     data, dates, provinces = get_csv()
 
-    plen = 30
+    plen = 14
 
     # Extend the date list.
     for i in range(plen):
