@@ -45,5 +45,6 @@ def get_csv():
 
     dates = sorted(list(set(data['date'])))
     provinces = list(set(data['prname']))
+    provinces.remove('Canada')
 
     return data, dates, provinces
