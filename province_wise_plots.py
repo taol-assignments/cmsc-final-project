@@ -137,6 +137,8 @@ def make_line_plot_over_time(
 
     plt.legend(handles, labels)
     plt.title(title)
+
+    # Set bbox_inches to 'tight' to remove padding.
     plt.savefig(filename, bbox_inches='tight')
 
 
