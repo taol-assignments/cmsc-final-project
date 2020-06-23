@@ -1,5 +1,5 @@
 # cmsc-final-project
-This is the source code of the Final Project of CMSC 6950. It aims to process, analyze,
+This is the source code of the Final Project of CMSC 6950. It can process, analyze,
  and present current Canadian Covid-19 data (https://health-infobase.canada.ca/src/data/covidLive/covid19.csv).
 ## Getting started
 The following instructions will show how to use the codes.
