@@ -2,7 +2,7 @@ bokeh==2.1.1
 cycler==0.10.0
 Cython==0.29.17
 Jinja2==2.11.2
-joblib==0.15.1
+joblib==1.2.0
 kiwisolver==1.2.0
 MarkupSafe==1.1.1
 matplotlib==3.2.2
